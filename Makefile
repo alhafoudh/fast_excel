@@ -56,7 +56,9 @@ CFLAGS = -I./libxlsxwriter/include -fPIC -O2
 
 all : libxlsxwriter custom_ext
 
-libxlsxwriter :
+libxlsxwriter : ./libxlsxwriter/lib/libxlsxwriter.a
+
+./libxlsxwriter/lib/libxlsxwriter.a :
 	@echo "Compiling libxlsxwriter ..."
 ifdef USE_CMAKE
 	@echo "run cmake libxlsxwriter ..."
@@ -72,7 +74,7 @@ $(CUSTOM_EXT_DIR)/%.o : $(CUSTOM_EXT_DIR)/%.c
 	@echo "Compiling $< ..."
 	$(Q)$(CC) $(CFLAGS) -c $< -o $@
 
-$(CUSTOM_LIB) : $(CUSTOM_OBJS) libxlsxwriter
+$(CUSTOM_LIB) : $(CUSTOM_OBJS) ./libxlsxwriter/lib/libxlsxwriter.a
 	@echo "Creating custom extensions shared library ..."
 	$(Q)$(CC) $(LDFLAGS) -o $@ $(CUSTOM_OBJS)
 
