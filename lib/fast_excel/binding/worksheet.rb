@@ -695,12 +695,12 @@ module Libxlsxwriter
            :comments, TableRows.ptr,
            :array, :pointer,
            :merged_ranges, MergedRanges.ptr,
-           #:selections, Selections.ptr,
-           :data_validations, :pointer, # TODO add real definition for lxw_data_validations
+           :selections, :pointer,
+           :data_validations, :pointer,
            :conditional_formats, :pointer,
            :image_props, :pointer,
-           :image_data, ImageData.ptr,
-           :chart_data, ChartData.ptr,
+           :embedded_image_props, :pointer,
+           :chart_data, :pointer,
            :drawing_rel_ids, :pointer,
            :vml_drawing_rel_ids, :pointer,
            :comment_objs, :pointer,
@@ -771,11 +771,11 @@ module Libxlsxwriter
            :zoom_scale_normal,     :uint8,
            :black_white,           :uint8,
            :num_validations,       :uint8,
-           :has_dynamic_arrays,    :uint8,
+           :has_dynamic_functions, :uint8,
 
            :vba_codename, :pointer,
            :num_buttons, :uint16,
-           :tab_color, :int,
+           :tab_color, :uint32,
            :margin_left, :double,
            :margin_right, :double,
            :margin_top, :double,
@@ -784,8 +784,8 @@ module Libxlsxwriter
            :margin_footer, :double,
 
            :default_row_height, :double,
-           :default_row_pixels, :uint,
-           :default_col_pixels, :uint,
+           :default_row_pixels, :uint32,
+           :default_col_pixels, :uint32,
            :default_row_zeroed, :uint8,
            :default_row_set, :uint8,
            :outline_row_level, :uint8,
@@ -807,8 +807,8 @@ module Libxlsxwriter
            :hbreaks_count, :uint16,
            :vbreaks_count, :uint16,
 
-           :drawing_rel_id, :uint,
-           :vml_drawing_rel_id, :uint,
+           :drawing_rel_id, :uint32,
+           :vml_drawing_rel_id, :uint32,
 
            :external_hyperlinks, :pointer,
            :external_drawing_links, :pointer,
@@ -817,7 +817,58 @@ module Libxlsxwriter
            :external_table_links, :pointer,
 
            :panes, Panes.by_value,
-           :protection, Protection.by_value
+           :top_left_cell, [:char, 16],
+
+           :protection, Protection.by_value,
+
+           :drawing, :pointer,
+           :default_url_format, :pointer,
+
+           :has_vml, :uint8,
+           :has_comments, :uint8,
+           :has_header_vml, :uint8,
+           :has_background_image, :uint8,
+           :has_buttons, :uint8,
+           :storing_embedded_image, :uint8,
+           :external_vml_comment_link, :pointer,
+           :external_comment_link, :pointer,
+           :external_vml_header_link, :pointer,
+           :external_background_link, :pointer,
+           :comment_author, :pointer,
+           :vml_data_id_str, :pointer,
+           :vml_header_id_str, :pointer,
+           :vml_shape_id, :uint32,
+           :vml_header_id, :uint32,
+           :dxf_priority, :uint32,
+           :comment_display_default, :uint8,
+           :data_bar_2010_index, :uint32,
+
+           :has_ignore_errors, :uint8,
+           :ignore_number_stored_as_text, :pointer,
+           :ignore_eval_error, :pointer,
+           :ignore_formula_differs, :pointer,
+           :ignore_formula_range, :pointer,
+           :ignore_formula_unlocked, :pointer,
+           :ignore_empty_cell_reference, :pointer,
+           :ignore_list_data_validation, :pointer,
+           :ignore_calculated_column, :pointer,
+           :ignore_two_digit_text_year, :pointer,
+
+           :use_1904_epoch, :uint8,
+
+           :excel_version, :uint16,
+
+           :header_footer_objs, [:pointer, 6],
+           :header_left_object_props, :pointer,
+           :header_center_object_props, :pointer,
+           :header_right_object_props, :pointer,
+           :footer_left_object_props, :pointer,
+           :footer_center_object_props, :pointer,
+           :footer_right_object_props, :pointer,
+           :background_image, :pointer,
+
+           :filter_rules, :pointer,
+           :num_filter_rules, :uint16
            # :drawing, Drawing.ptr,
            # :list_pointers, WorksheetListPointers.by_value
   end
