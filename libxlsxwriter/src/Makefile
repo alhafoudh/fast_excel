@@ -144,6 +144,7 @@ TOBJS = $(patsubst %.c,%.to,$(SRCS))
 
 # Build the object files and the libraries.
 all : $(LIBXLSXWRITER_A) $(LIBXLSXWRITER_SO)
+	$(Q)mkdir -p ../lib
 	$(Q)cp $(LIBXLSXWRITER_A) $(LIBXLSXWRITER_SO) ../lib
 
 ifeq ($(UNAME), Darwin)
