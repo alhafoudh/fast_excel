@@ -56,9 +56,9 @@ CFLAGS = -I./libxlsxwriter/include -fPIC -O2
 
 all : libxlsxwriter custom_ext
 
-libxlsxwriter : ./libxlsxwriter/lib/libxlsxwriter.a
+.PHONY: libxlsxwriter
 
-./libxlsxwriter/lib/libxlsxwriter.a :
+libxlsxwriter :
 	@echo "Compiling libxlsxwriter ..."
 ifdef USE_CMAKE
 	@echo "run cmake libxlsxwriter ..."
