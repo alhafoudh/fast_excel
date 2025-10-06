@@ -64,7 +64,7 @@ ifdef USE_CMAKE
 	@echo "run cmake libxlsxwriter ..."
 	cmake libxlsxwriter
 else
-	$(Q)$(MAKE) -C libxlsxwriter
+	$(Q)LDFLAGS= $(MAKE) -C libxlsxwriter
 endif
 
 custom_ext : $(CUSTOM_LIB)
